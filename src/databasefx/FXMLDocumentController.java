@@ -1,13 +1,23 @@
 package databasefx;
 
+import animatefx.animation.FadeOut;
+import animatefx.animation.FadeOutLeft;
+import animatefx.animation.FadeOutRight;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class FXMLDocumentController implements Initializable 
 {
@@ -15,14 +25,20 @@ public class FXMLDocumentController implements Initializable
     private ArrayList<Employee> employeeArrayList;
     private int index = -1;
     private boolean isCreatingNewEmp = false;
+    
+    ArrayList<JFXTextField> tfArray = new ArrayList<>();
 
     @FXML private JFXButton newBTN;
+    @FXML private JFXButton prevBTN;
+    @FXML private JFXButton nextBTN;
     @FXML private JFXTextField idTF;
     @FXML private JFXTextField firstNameTF;
     @FXML private JFXTextField middleNameTF;
     @FXML private JFXTextField lastNameTF;
     @FXML private JFXTextField emailTF;
     @FXML private JFXTextField phoneTF;
+        
+    boolean isNextPressed, isPrevPressed;
 
 
     
@@ -79,7 +95,11 @@ public class FXMLDocumentController implements Initializable
     
     @FXML private void clickedNext(ActionEvent event)
     {
+        isNextPressed = true;
          if (index < employeeArrayList.size() - 1) {
+             
+             animateTextField(tfArray);
+
             index++;
         }
         setFieldDetails();
@@ -87,7 +107,9 @@ public class FXMLDocumentController implements Initializable
     
     @FXML private void clickedPrevious(ActionEvent event)
     {
+        isPrevPressed = true;
         if (index > 0) {
+            animateTextField(tfArray);
             index--;
         }
         setFieldDetails();
@@ -110,10 +132,19 @@ public class FXMLDocumentController implements Initializable
         setFieldDetails();
     }
     
-    
-    
-    
-    
+    private void animateTextField(ArrayList<JFXTextField> TFarray)
+    {
+        Iterator iter = TFarray.iterator();
+        while(iter.hasNext())
+        {
+            if(isNextPressed)
+                new FadeOutRight((Node) iter.next()).setCycleCount(1).setResetOnFinished(true).play();
+           else
+                new FadeOutLeft((Node) iter.next()).setCycleCount(1).setResetOnFinished(true).play();
+        }
+        isNextPressed = isPrevPressed = false;
+    }
+
     private void clearFields() {
         idTF.setText("");
         firstNameTF.setText("");
@@ -147,14 +178,24 @@ public class FXMLDocumentController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+        isNextPressed = isPrevPressed = false;
+        
         employeeArrayList = DB.getEmployees();
         if (employeeArrayList.size() > 0) {
             index = 0;
         }
         setFieldDetails();
         
-
+        
+        //Filling the JFXTextField arrayList with all the TextField elements.
+        tfArray.add(idTF);
+        tfArray.add(firstNameTF);
+        tfArray.add(middleNameTF);
+        tfArray.add(lastNameTF);
+        tfArray.add(emailTF);
+        tfArray.add(phoneTF);
     }
+    
         
         
     
