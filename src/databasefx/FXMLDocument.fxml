@@ -38,12 +38,12 @@
             <FontIcon iconColor="WHITE" iconLiteral="fa-step-backward" iconSize="22" />
          </graphic>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="242.0" layoutY="392.0" onAction="#clickedPrevious" prefHeight="57.0" prefWidth="160.0" style="-fx-background-color: #3043DE; -fx-background-radius: 10;" text="Prev" textFill="WHITE">
+      <JFXButton fx:id="prevBTN" buttonType="RAISED" layoutX="242.0" layoutY="392.0" onAction="#clickedPrevious" prefHeight="57.0" prefWidth="160.0" style="-fx-background-color: #3043DE; -fx-background-radius: 10;" text="Prev" textFill="WHITE">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fa-caret-left" iconSize="30" />
          </graphic>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="467.0" layoutY="392.0" onAction="#clickedNext" prefHeight="57.0" prefWidth="160.0" style="-fx-background-color: #3043DE; -fx-background-radius: 10;" text="Next" textFill="WHITE">
+      <JFXButton fx:id="nextBTN" buttonType="RAISED" layoutX="467.0" layoutY="392.0" onAction="#clickedNext" prefHeight="57.0" prefWidth="160.0" style="-fx-background-color: #3043DE; -fx-background-radius: 10;" text="Next" textFill="WHITE">
          <graphic>
             <FontIcon iconColor="WHITE" iconLiteral="fa-caret-right" iconSize="30" />
          </graphic>
@@ -54,7 +54,7 @@
          </graphic>
       </JFXButton>
       <FontIcon iconLiteral="fa-address-card" iconSize="30" layoutX="67.0" layoutY="264.0" />
-      <FontIcon iconLiteral="fa-hashtag" iconSize="30" layoutX="334.0" layoutY="122.0" />
+      <FontIcon fx:id="hashIcon" iconLiteral="fa-hashtag" iconSize="30" layoutX="334.0" layoutY="122.0" />
       <FontIcon iconLiteral="fa-at" iconSize="30" layoutX="71.0" layoutY="316.0" />
       <FontIcon iconLiteral="fa-phone" iconSize="30" layoutX="72.0" layoutY="371.0" />
       <Text fill="#e44b6c" layoutX="349.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FX SQLite Editor">
